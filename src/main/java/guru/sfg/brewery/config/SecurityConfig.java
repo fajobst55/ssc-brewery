@@ -15,17 +15,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.LdapShaPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new LdapShaPasswordEncoder();
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -43,6 +38,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic();
     }
 
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new StandardPasswordEncoder();
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("ADMIN")
                 .and()
                 .withUser("user")
-                .password("{SSHA}6Nwfi49ifg0WkGnPuPQeOh6tY8gP7YGCDVR2wA==")
+                .password("2679f1928be976e4bc8af2564ed6276ca64d723cf9427a3c500851f965f04b8ba4194e66924d7879")
                 .roles("USER")
                 .and()
                 .withUser("scott")
