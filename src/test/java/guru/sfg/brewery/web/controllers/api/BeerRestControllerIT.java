@@ -49,7 +49,7 @@ public class BeerRestControllerIT extends BaseIT {
         void deleteBeerHttpBasic() throws Exception{
             mockMvc.perform(delete("/api/v1/beer/" + beerToDelete().getId())
                             .with(httpBasic("spring", "guru")))
-                    .andExpect(status().isForbidden());
+                    .andExpect(status().is2xxSuccessful());
         }
 
         @ParameterizedTest(name = "#{index} with [{arguments}]")
@@ -63,7 +63,7 @@ public class BeerRestControllerIT extends BaseIT {
         @Test
         void deleteBeerNoAuth() throws Exception {
             mockMvc.perform(delete("/api/v1/beer/" + beerToDelete().getId()))
-                    .andExpect(status().isForbidden());
+                    .andExpect(status().isUnauthorized());
         }
     }
 
