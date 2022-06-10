@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Created by jt on 6/16/20.
  */
 @Disabled
-public class PasswordEncodingTest {
+public class PasswordEncodingTests {
 
     static final String PASSWORD = "password";
 
