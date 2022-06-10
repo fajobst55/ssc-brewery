@@ -1,4 +1,5 @@
 package guru.sfg.brewery.web.controllers;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -7,26 +8,26 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-public class BreweryControllerIT extends BaseIT {
+class BreweryControllerIT extends BaseIT {
 
     @Test
     void listBreweriesCUSTOMER() throws Exception {
         mockMvc.perform(get("/brewery/breweries")
-                        .with(httpBasic("scott", "tiger")))
+                .with(httpBasic("scott", "tiger")))
                 .andExpect(status().is2xxSuccessful());
     }
 
     @Test
     void listBreweriesADMIN() throws Exception {
         mockMvc.perform(get("/brewery/breweries")
-                        .with(httpBasic("spring", "guru")))
+                .with(httpBasic("spring", "guru")))
                 .andExpect(status().is2xxSuccessful());
     }
 
     @Test
     void listBreweriesUSER() throws Exception {
         mockMvc.perform(get("/brewery/breweries")
-                        .with(httpBasic("user", "password")))
+                .with(httpBasic("user", "password")))
                 .andExpect(status().isForbidden());
     }
 
@@ -39,21 +40,21 @@ public class BreweryControllerIT extends BaseIT {
     @Test
     void getBreweriesJsonCUSTOMER() throws Exception {
         mockMvc.perform(get("/brewery/api/v1/breweries")
-                        .with(httpBasic("scott", "tiger")))
+                .with(httpBasic("scott", "tiger")))
                 .andExpect(status().is2xxSuccessful());
     }
 
     @Test
     void getBreweriesJsonADMIN() throws Exception {
         mockMvc.perform(get("/brewery/api/v1/breweries")
-                        .with(httpBasic("spring", "guru")))
+                .with(httpBasic("spring", "guru")))
                 .andExpect(status().is2xxSuccessful());
     }
 
     @Test
     void getBreweriesJsonUSER() throws Exception {
         mockMvc.perform(get("/brewery/api/v1/breweries")
-                        .with(httpBasic("user", "password")))
+                .with(httpBasic("user", "password")))
                 .andExpect(status().isForbidden());
     }
 

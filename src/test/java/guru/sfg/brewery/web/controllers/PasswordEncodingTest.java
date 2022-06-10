@@ -9,23 +9,26 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.util.DigestUtils;
 
-import java.nio.charset.StandardCharsets;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+/**
+ * Created by jt on 6/16/20.
+ */
 @Disabled
 public class PasswordEncodingTest {
-    
-    static final String PASSWORD = "password";
 
+    static final String PASSWORD = "password";
 
     @Test
     void testBcrypt15() {
-        PasswordEncoder bcrypt10 = new BCryptPasswordEncoder(10);
+        PasswordEncoder bcrypt = new BCryptPasswordEncoder(15);
 
-        System.out.println(bcrypt10.encode(PASSWORD));
-        System.out.println(bcrypt10.encode(PASSWORD));
-        System.out.println(bcrypt10.encode("tiger"));
+        System.out.println(bcrypt.encode(PASSWORD));
+        System.out.println(bcrypt.encode(PASSWORD));
+        System.out.println(bcrypt.encode("tiger"));
+
     }
+
     @Test
     void testBcrypt() {
         PasswordEncoder bcrypt = new BCryptPasswordEncoder();
@@ -33,6 +36,7 @@ public class PasswordEncodingTest {
         System.out.println(bcrypt.encode(PASSWORD));
         System.out.println(bcrypt.encode(PASSWORD));
         System.out.println(bcrypt.encode("guru"));
+
     }
 
     @Test
@@ -41,20 +45,18 @@ public class PasswordEncodingTest {
 
         System.out.println(sha256.encode(PASSWORD));
         System.out.println(sha256.encode(PASSWORD));
-        System.out.println(sha256.encode(PASSWORD));
-
     }
 
     @Test
-    void testLdap()  {
+    void testLdap() {
         PasswordEncoder ldap = new LdapShaPasswordEncoder();
         System.out.println(ldap.encode(PASSWORD));
         System.out.println(ldap.encode(PASSWORD));
         System.out.println(ldap.encode("tiger"));
-
         String encodedPwd = ldap.encode(PASSWORD);
 
-        assertTrue(ldap.matches(PASSWORD, encodedPwd));
+        assertTrue(ldap.matches(PASSWORD, encodedPwd ));
+
     }
 
     @Test
@@ -66,10 +68,10 @@ public class PasswordEncodingTest {
 
     @Test
     void hashingExample() {
-        System.out.println(DigestUtils.md5DigestAsHex(PASSWORD.getBytes(StandardCharsets.UTF_8)));
-        System.out.println(DigestUtils.md5DigestAsHex(PASSWORD.getBytes(StandardCharsets.UTF_8)));
+        System.out.println(DigestUtils.md5DigestAsHex(PASSWORD.getBytes()));
+        System.out.println(DigestUtils.md5DigestAsHex(PASSWORD.getBytes()));
 
-        String salted = PASSWORD+"ThisIsMySALTVALUE";
-        System.out.println(DigestUtils.md5DigestAsHex(salted.getBytes(StandardCharsets.UTF_8)));
+        String salted = PASSWORD + "ThisIsMySALTVALUE";
+        System.out.println(DigestUtils.md5DigestAsHex(salted.getBytes()));
     }
 }

@@ -19,7 +19,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 /**
  * Created by jt on 6/13/20.
  */
@@ -48,7 +47,7 @@ public class BeerRestControllerIT extends BaseIT {
         @Test
         void deleteBeerHttpBasic() throws Exception{
             mockMvc.perform(delete("/api/v1/beer/" + beerToDelete().getId())
-                            .with(httpBasic("spring", "guru")))
+                    .with(httpBasic("spring", "guru")))
                     .andExpect(status().is2xxSuccessful());
         }
 
@@ -56,7 +55,7 @@ public class BeerRestControllerIT extends BaseIT {
         @MethodSource("guru.sfg.brewery.web.controllers.BeerControllerIT#getStreamNotAdmin")
         void deleteBeerHttpBasicNotAuth(String user, String pwd) throws Exception {
             mockMvc.perform(delete("/api/v1/beer/" + beerToDelete().getId())
-                            .with(httpBasic(user, pwd)))
+                    .with(httpBasic(user, pwd)))
                     .andExpect(status().isForbidden());
         }
 
@@ -90,6 +89,7 @@ public class BeerRestControllerIT extends BaseIT {
         @Test
         void findBeerById() throws Exception {
             Beer beer = beerRepository.findAll().get(0);
+
             mockMvc.perform(get("/api/v1/beer/" + beer.getId()))
                     .andExpect(status().isUnauthorized());
         }
@@ -98,8 +98,9 @@ public class BeerRestControllerIT extends BaseIT {
         @MethodSource("guru.sfg.brewery.web.controllers.BeerControllerIT#getStreamAllUsers")
         void findBeerByIdAUTH(String user, String pwd) throws Exception {
             Beer beer = beerRepository.findAll().get(0);
+
             mockMvc.perform(get("/api/v1/beer/" + beer.getId())
-                            .with(httpBasic(user, pwd)))
+                    .with(httpBasic(user, pwd)))
                     .andExpect(status().isOk());
         }
     }
@@ -117,7 +118,7 @@ public class BeerRestControllerIT extends BaseIT {
         @MethodSource("guru.sfg.brewery.web.controllers.BeerControllerIT#getStreamAllUsers")
         void findBeerByUpcAUTH(String user, String pwd) throws Exception {
             mockMvc.perform(get("/api/v1/beerUpc/0631234200036")
-                            .with(httpBasic(user, pwd)))
+                    .with(httpBasic(user, pwd)))
                     .andExpect(status().isOk());
         }
     }
