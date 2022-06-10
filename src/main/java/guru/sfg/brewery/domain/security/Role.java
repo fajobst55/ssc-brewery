@@ -5,6 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * Created by jt on 6/29/20.
+ */
 @Setter
 @Getter
 @AllArgsConstructor
