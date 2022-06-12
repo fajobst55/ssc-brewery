@@ -76,6 +76,7 @@ class BeerOrderControllerTest extends BaseIT {
                 .andExpect(status().isUnauthorized());
     }
 
+
     @WithUserDetails("spring")
     @Test
     void createOrderUserAdmin() throws Exception {
