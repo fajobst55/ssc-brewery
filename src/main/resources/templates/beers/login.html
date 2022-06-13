@@ -1,21 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout (~{::body},'home')}">
 <head>
-    <title>Login page</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+    <meta charset="UTF-8"/>
+    <title>SFG Brewery</title>
 </head>
 <body>
-<h1>Login page</h1>
-<p>Example user: user / password</p>
-<p th:if="${loginError}" class="error">Wrong user or password</p>
-<form th:action="@{/login}" method="post">
-    <label for="username">Username</label>:
-    <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
-    <label for="password">Password</label>:
-    <input type="password" id="password" name="password" /> <br />
-    <input type="submit" value="Log in" />
-</form>
-<p><a href="/index" th:href="@{/index}">Back to home page</a></p>
+<h2 th:text="#{welcomemsg}">SFG Brewery Monolith</h2>
+
+<div class="row" sec:authorize="!isAuthenticated()">
+    <div class="col-md-12">
+        <div th:if="${param.error}" class="alert alert-danger">Invalid Username or Password</div>
+        <div th:if="${param.logout}" class="alert alert-success">You Have Logged Out</div>
+        <form th:action="@{/login}" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" autofocus="true" autocomplete="off">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" autofocus="true" autocomplete="off">
+            <input type="submit" value="Log In">
+        </form>
+    </div>
+</div>
+<div class="row" sec:authorize="isAuthenticated()">
+    <div class="col-md-12">
+        <p th:text="'Welcome: ' + ${#authentication?.principal?.username}">User</p>
+        <p><a th:href="@{/logout}">Logout</a></p>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <img class="img-responsive" src="../static/resources/images/brewery.png" th:src="@{/resources/images/brewery.png}"/>
+    </div>
+</div>
+
 </body>
 </html>
