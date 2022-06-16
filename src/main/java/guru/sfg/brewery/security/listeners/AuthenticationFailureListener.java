@@ -50,7 +50,7 @@ public class AuthenticationFailureListener {
             LoginFailure failure = loginFailureRepository.save(builder.build());
             log.debug("Failure Event: " + failure.getId());
 
-            if(failure.getUser() != null) {
+            if (failure.getUser() != null) {
                 lockUserAccount(failure.getUser());
             }
         }

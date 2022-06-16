@@ -255,7 +255,7 @@ public class DefaultBreweryLoader implements CommandLineRunner {
                 .build());
 
         userRepository.save(User.builder()
-                .username("templates/user")
+                .username("user")
                 .password(passwordEncoder.encode("password"))
                 .role(userRole)
                 .build());
