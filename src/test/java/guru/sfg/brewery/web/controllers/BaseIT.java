@@ -36,11 +36,11 @@ public abstract class BaseIT {
     public static Stream<Arguments> getStreamAllUsers() {
         return Stream.of(Arguments.of("spring" , "guru"),
                 Arguments.of("scott", "tiger"),
-                Arguments.of("user", "password"));
+                Arguments.of("templates/user", "password"));
     }
 
     public static Stream<Arguments> getStreamNotAdmin() {
         return Stream.of(Arguments.of("scott", "tiger"),
-                Arguments.of("user", "password"));
+                Arguments.of("templates/user", "password"));
     }
 }

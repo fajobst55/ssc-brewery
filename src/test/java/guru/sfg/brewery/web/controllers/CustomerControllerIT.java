@@ -35,7 +35,7 @@ public class CustomerControllerIT extends BaseIT {
         @Test
         void testListCustomersNOTAUTH() throws Exception {
             mockMvc.perform(get("/customers")
-                    .with(httpBasic("user", "password")))
+                    .with(httpBasic("templates/user", "password")))
                     .andExpect(status().isForbidden());
         }
 
